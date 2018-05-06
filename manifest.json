@@ -1,0 +1,21 @@
+{
+  "manifest_version": 2,
+  "name": "Malayalam Font",
+  "version": "0.0.1",
+  "description": "Malayalam fonts for the entire web.",
+  "permissions": [
+    "<all_urls>"
+  ],
+  "icons": {
+    "48": "icons/icon-48.png",
+    "72": "icons/icon-72.png",
+    "96": "icons/icon-96.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [ "<all_urls>" ],
+      "js": [ "src/content.js" ],
+      "css" : ["src/malayalam.css"]
+    }
+  ]
+}
