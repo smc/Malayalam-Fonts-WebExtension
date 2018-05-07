@@ -1,8 +1,51 @@
-var CURRENT_FONT = 'Karumbi';
+var browser = browser || chrome;
+
+const FONTS = {
+  'meera': 'Meera',
+  'rachana': 'Rachana',
+  'manjari': 'Manjari',
+  'anjali':  'AnjaliOldLipi',
+  'suruma': 'Suruma',
+  'raghu': 'RaghuMalayalam',
+  'dyuthi': 'Dyuthi',
+  'keraleeyam': 'Keraleeyam',
+  'uroob': 'Uroob',
+  'chilanka': 'Chilanka',
+  'karumbi': 'Karumbi'
+}
+browser.runtime.onMessage.addListener(updateFont);
+
+function updateFont(request, sender, response) {
+  let font = request.font || 'meera';
+  console.log('updateFont request', request.font);
+
+  // DOM load method
+  var allElements = [...document.getElementsByTagName("*")]
+  allElements.forEach((el) => checkAndAdd(el, FONTS[font]));
+};
 
 function css( element, property ) {
   return window.getComputedStyle( element, null ).getPropertyValue( property );
 }
+
+function checkAndAdd(node, CURRENT_FONT) {
+  let text = node.textContent;
+  if (!text) {
+    return;
+  }
+  // Apply only if malayalam text is found
+  if (!text.match(/[\u{0D01}-\u{0D7F}]/gu)) {
+    return;
+  }
+
+  let font = css(node, 'font-family');
+  if (font.search(CURRENT_FONT) === -1) {
+    node.setAttribute("style", `font-family: ${CURRENT_FONT}, ${font};`);
+    console.log('adding font', CURRENT_FONT);
+  }
+}
+
+
 
 /*
 // CSS Method
@@ -27,30 +70,6 @@ allStyle.forEach((sheet) => {
   });
 });
 */
-
-
-function checkAndAdd(node) {
-  let text = node.textContent;
-  if (!text) {
-    return;
-  }
-  // Apply only if malayalam text is found
-  if (!text.match(/[\u{0D01}-\u{0D7F}]/gu)) {
-    return;
-  }
-
-  let font = css(node, 'font-family');
-  if (font.search(CURRENT_FONT) === -1) {
-    node.setAttribute("style", `font-family: ${CURRENT_FONT}, ${font};`);
-    console.log('adding font');
-  }
-}
-
-
-// DOM load method
-var allElements = [...document.getElementsByTagName("*")]
-allElements.forEach((el) => checkAndAdd(el));
-
 
 /*
 // Mutation method
