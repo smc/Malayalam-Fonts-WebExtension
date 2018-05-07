@@ -17,7 +17,6 @@ browser.runtime.onMessage.addListener(updateFont);
 
 function updateFont(request, sender, response) {
   let font = request.font || 'meera';
-  console.log('updateFont request', request.font);
 
   // DOM load method
   var allElements = [...document.getElementsByTagName("*")]
@@ -41,7 +40,6 @@ function checkAndAdd(node, CURRENT_FONT) {
   let font = css(node, 'font-family');
   if (font.search(CURRENT_FONT) === -1) {
     node.setAttribute("style", `font-family: ${CURRENT_FONT}, ${font};`);
-    console.log('adding font', CURRENT_FONT);
   }
 }
 

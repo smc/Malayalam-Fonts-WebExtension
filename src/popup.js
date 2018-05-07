@@ -8,7 +8,6 @@ var btns = document.querySelectorAll('div');
 btns.forEach((btn) => {
   btn.onclick = (e) => {
     let name = e.target.id;
-    console.log(name);
     getActiveTab((tabs) => {
       browser.tabs.sendMessage(tabs[0].id, {font: name});
       browser.storage.local.set({font: name});

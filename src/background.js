@@ -5,10 +5,8 @@ function getActiveTab(cb) {
 }
 
 function refresh() {
-  console.log('calling refresh');
   getActiveTab((tabs) => {
     browser.storage.local.get(['font'], (result) => {
-      console.log(result);
       browser.tabs.sendMessage(tabs[0].id, {font: result.font});
     });
   });
