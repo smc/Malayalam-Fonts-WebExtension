@@ -15,3 +15,8 @@ btns.forEach((btn) => {
     });
   };
 });
+
+browser.storage.local.get(['font'], (result) => {
+  let btn = document.getElementById(result.font);
+  btn.classList.add('active');
+});
