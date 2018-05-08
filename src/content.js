@@ -13,35 +13,38 @@ const FONTS = {
   'chilanka': 'Chilanka',
   'karumbi': 'Karumbi'
 }
-browser.runtime.onMessage.addListener(updateFont);
-
-function updateFont(request, sender, response) {
-  let font = request.font || 'meera';
-
-  // DOM load method
-  var allElements = [...document.getElementsByTagName("*")]
-  allElements.forEach((el) => checkAndAdd(el, FONTS[font]));
-};
 
 function css( element, property ) {
   return window.getComputedStyle( element, null ).getPropertyValue( property );
 }
 
 function checkAndAdd(node, CURRENT_FONT) {
-  let text = node.textContent;
-  if (!text) {
-    return;
-  }
-  // Apply only if malayalam text is found
-  if (!text.match(/[\u{0D01}-\u{0D7F}]/gu)) {
-    return;
-  }
-
   let font = css(node, 'font-family');
   if (font.search(CURRENT_FONT) === -1) {
     node.setAttribute("style", `font-family: ${CURRENT_FONT}, ${font};`);
   }
 }
+
+function updateFont(request, sender, response) {
+  let font = request.font || 'meera';
+
+  let nodeIterator = document.createNodeIterator(
+    document.body,
+    NodeFilter.SHOW_ELEMENT,
+    function(node) {
+      let text = node.textContent;
+      if (!text ||!text.match(/[\u{0D01}-\u{0D7F}]/gu)) {
+        return NodeFilter.FILTER_REJECT;
+      }
+      return NodeFilter.FILTER_ACCEPT;
+    }
+  );
+  let currentNode;
+  while (currentNode = nodeIterator.nextNode()) {
+    checkAndAdd(currentNode, FONTS[font]);
+  }
+};
+
 
 
 
@@ -88,3 +91,5 @@ observer.observe(document, {
     characterDataOldValue: true
 });
 */
+
+browser.runtime.onMessage.addListener(updateFont);
