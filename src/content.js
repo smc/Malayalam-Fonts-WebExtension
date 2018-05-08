@@ -28,6 +28,10 @@ function checkAndAdd(node, CURRENT_FONT) {
 function updateFont(request, sender, response) {
   let font = request.font || 'meera';
 
+  if (font === 'disable') {
+    return;
+  }
+
   let nodeIterator = document.createNodeIterator(
     document.body,
     NodeFilter.SHOW_ELEMENT,
