@@ -14,8 +14,8 @@ const FONTS = {
   'karumbi': 'Karumbi'
 }
 
-function css( element, property ) {
-  return window.getComputedStyle( element, null ).getPropertyValue( property );
+function css(element, property) {
+  return window.getComputedStyle(element, null).getPropertyValue(property);
 }
 
 function checkAndAdd(node, CURRENT_FONT) {
@@ -28,6 +28,7 @@ function checkAndAdd(node, CURRENT_FONT) {
 function updateFont(request, sender, response) {
   let font = request.font || 'meera';
 
+  browser.runtime.sendMessage({icon: font});
   if (font === 'disable') {
     return;
   }

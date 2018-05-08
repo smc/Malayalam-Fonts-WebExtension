@@ -12,5 +12,13 @@ function refresh() {
   });
 }
 
+function setIcon(prop) {
+  let name = prop.icon;
+
+  browser.browserAction.setIcon({ path: `icons/icon-${name}.png` });
+}
+
+
 browser.tabs.onUpdated.addListener(refresh);
 browser.tabs.onActivated.addListener(refresh);
+browser.runtime.onMessage.addListener(setIcon);
