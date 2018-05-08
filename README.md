@@ -14,3 +14,6 @@ Malayalam fonts for the entire web.
 ## Chrome
 - open `chrome://extensions/` and enable developer mode
 - click on load unpacked and select the source folder
+
+## Firefox Android
+- web-ext run --target=firefox-android --android-device FA4AX0201736
