@@ -21,7 +21,7 @@ function css( element, property ) {
 function checkAndAdd(node, CURRENT_FONT) {
   let font = css(node, 'font-family');
   if (font.search(CURRENT_FONT) === -1) {
-    node.setAttribute("style", `font-family: ${CURRENT_FONT}, ${font};`);
+    node.setAttribute("style", `font-family: ${CURRENT_FONT}, ${font} !important;`);
   }
 }
 
