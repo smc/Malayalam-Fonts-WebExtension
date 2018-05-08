@@ -3,8 +3,8 @@ Malayalam fonts for the entire web.
 
 
 # How to Install
-- [Google Chrome / Chromium](https://chrome.google.com/webstore/detail/malayalam-font/jgdfkpocgoliiikomkacimfdkedjdgfo)
 - [Firefox](https://addons.mozilla.org/en-US/firefox/addon/malayalam-fonts/)
+- [Google Chrome / Chromium](https://chrome.google.com/webstore/detail/malayalam-font/jgdfkpocgoliiikomkacimfdkedjdgfo)
 
 
 # Development
