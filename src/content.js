@@ -11,7 +11,8 @@ const FONTS = {
   'keraleeyam': 'Keraleeyam',
   'uroob': 'Uroob',
   'chilanka': 'Chilanka',
-  'karumbi': 'Karumbi'
+  'karumbi': 'Karumbi',
+  'gayathri': 'Gayathri',
 }
 
 function css(element, property) {
